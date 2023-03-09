@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTPUT</title>
+    <style>
+        *{
+			font-family: "Courier New", Courier, monospace;
+		}
+
+		body {
+			background-image: url("bg3.jpg");
+			background-size: cover;
+			background-repeat: repeat;
+		}
+        div{
+        position: absolute;
+        top: 250px;
+        left: 20px;
+        }
+        #myText{
+            font-size: 38px;
+
+        }
+        @media(max-width:600px){
+            h1{
+                font-size: 26px;
+            }
+            #myText{
+                font-size: 28px;
+            }
+
+        }
+        @media(max-width:330px){
+            h1{
+                font-size: 24px;
+            }
+            #myText{
+                font-size: 26px;
+
+            }
+        }
+
+    </style>
+
+
+    
+</head>
+<body>
+    <div>
+        <h1 >
+            The choosen Symptoms resembles the symptoms of :
+            <u><span id="myText"></span></u>
+        </h1>
+    </div>
+        <script>
+            var s = location.search.substring(1)
+            // var s=localStorage.getItem('out');
+            document.getElementById("myText").innerHTML = unescape(s);  
+    
+        </script>
+</body>
+</html>
