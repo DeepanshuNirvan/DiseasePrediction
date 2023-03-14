@@ -9,7 +9,10 @@
         *{
 			font-family: "Courier New", Courier, monospace;
 		}
-
+        a{
+            color: #000000;
+            text-decoration: none;
+        }
 		body {
 			background-image: url("bg3.jpg");
 			background-size: cover;
@@ -52,13 +55,16 @@
     <div>
         <h1 >
             The choosen Symptoms resembles the symptoms of :
-            <u><span id="myText"></span></u>
+            <a href="#" id="link" target="_blank"><u><span id="myText"></span></u></a>
         </h1>
     </div>
         <script>
-            var s = location.search.substring(1)
+            var s = location.search.substring(1);
             // var s=localStorage.getItem('out');
-            document.getElementById("myText").innerHTML = unescape(s);  
+            document.getElementById("myText").innerHTML = unescape(s); 
+            var disLink="https://www.google.com/search?q="+unescape(s);
+            document.getElementById("link").href=disLink;
+
     
         </script>
 </body>
