@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYMPTOM SELECTION</title>
     <style>
-        *{
+        * {
             font-family: "Courier New", Courier, monospace;
         }
 
@@ -16,243 +16,273 @@
             background-size: cover;
             background-repeat: repeat;
         }
-        table td{
-            font-size: 20px;           
-            padding: 5px;
-        
-        }
-        input[type=checkbox]{
-          accent-color: red;
-        }
-        .button:hover {
-			background-color: rgb(252, 77, 77);
-			color: black;
-		}
 
-		.button {
-			bottom: 10px;
-			margin-top:30px;
+
+        table td {
+            font-size: 20px;
+            padding: 5px;
+
+        }
+
+        input[type=checkbox] {
+            accent-color: red;
+        }
+
+        .button:hover {
+            background-color: rgb(252, 77, 77);
+            color: black;
+        }
+
+        .button {
+            bottom: 10px;
+            margin-top: 30px;
             margin-bottom: 40px;
             width: 300px;
             height: 50px;
-			background-color: black;
-			color: white;
-			font-size: 24px;
-			border: none;
-			border-radius: 15px;
-			cursor: pointer;
-			box-shadow: 10px 10px 8px #888888;
-		}
-        @media(max-width:950px){
-            table td{
-            font-size: 16px;           
-            padding: 3px;
+            background-color: black;
+            color: white;
+            font-size: 24px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 10px 10px 8px #888888;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db; 
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
             }
-            h1{
+
+            @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
+
+        @media(max-width:950px) {
+            table td {
+                font-size: 16px;
+                padding: 3px;
+            }
+
+            h1 {
                 font-size: 18px;
             }
-            h3{
+
+            h3 {
                 font-size: 14px;
             }
 
         }
-        @media(max-width:500px){
-            table td{
-            font-size: 12px;           
-            padding: 2px;
+
+        @media(max-width:500px) {
+            table td {
+                font-size: 12px;
+                padding: 2px;
             }
-            h1{
+
+            h1 {
                 font-size: 14px;
             }
-            h3{
+
+            h3 {
                 font-size: 12px;
             }
 
         }
-
     </style>
     <script>
-        
-        function sub(){
+        function hid(){
+            //console.log("hiiiiii");
+            document.getElementById("load").style.display = "none";
+        }
+
+        function sub() {
+            document.getElementById("load").style.display = 'block';
             const url = 'https://dollybindal.pythonanywhere.com/dis';
-            
-            var str=""
+
+            var str = ""
             var final;
-            var chk=document.getElementsByName('symptoms');
-            for(var i=0;i<chk.length;i++){
-                if(chk[i].checked==true){
-                    str=str+chk[i].value.toString()+",";
+            var chk = document.getElementsByName('symptoms');
+            for (var i = 0; i < chk.length; i++) {
+                if (chk[i].checked == true) {
+                    str = str + chk[i].value.toString() + ",";
                 }
             }
             console.log(str);
 
-            fetch(url, {    
-            method: 'POST',
-            body: JSON.stringify({
-                "input_array":str
-            }),
-            headers:{
-                "Content-Type":"application/json; charset=UTF-8"
-            }
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "input_array": str
+                }),
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8"
+                }
             })
-            .then(response => response.text())
-            .then(data=>window.location.href="output.html?"+data);
-            
+                .then(response => response.text())
+                .then(data => window.location.href = "output.html?" + data);
+                 hid();
+
         }
     </script>
 </head>
 
-<body>
+<body onload="hid()">
     <center>
         <h1>Choose your symptoms.</h1>
         <h3> (Select At least 3-4 symptoms for better prediction)</h3>
-        
-    
-    <form>
-        <table>
-            <tr>
-                <td><input type="checkbox" value=0 name="symptoms">Itching</td>
-                <td><input type="checkbox" value=1 name="symptoms">Skin rash</td>
-                <td><input type="checkbox" value=2 name="symptoms">Nodal skin eruptions</td>
-                <td><input type="checkbox" value=3 name="symptoms">Continuous sneezing</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=4 name="symptoms">Shivering</td>
-                <td><input type="checkbox" value=5 name="symptoms">Chills</td>
-                <td><input type="checkbox" value=6 name="symptoms">Joint pain</td>
-                <td><input type="checkbox" value=7 name="symptoms">Stomach pain</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=8 name="symptoms">Acidity</td>
-                <td><input type="checkbox" value=9 name="symptoms">Ulcers on tongue</td>
-                <td><input type="checkbox" value=10 name="symptoms">Muscle wasting</td>
-                <td><input type="checkbox" value=11 name="symptoms">Vomiting</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=12 name="symptoms">Burning micturition</td>
-                <td><input type="checkbox" value=13 name="symptoms">Spotting  urination</td>
-                <td><input type="checkbox" value=14 name="symptoms">Fatigue</td>
-                <td><input type="checkbox" value=15 name="symptoms">Weight gain</td>
-            </tr>
-            <tr>
 
-                <td><input type="checkbox" value=16 name="symptoms">Anxiety</td>
-                <td><input type="checkbox" value=17 name="symptoms">Cold hands and feets</td>
-                <td><input type="checkbox" value=18 name="symptoms">Mood swings</td>
-                <td><input type="checkbox" value=19 name="symptoms">Weight loss</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=20 name="symptoms">Restlessness</td>
-                <td><input type="checkbox" value=21 name="symptoms">Lethargy</td>
-                <td><input type="checkbox" value=22 name="symptoms">Patches in throat</td>
-                <td><input type="checkbox" value=23 name="symptoms">Irregular sugar level</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=24 name="symptoms">Cough</td>
-                <td><input type="checkbox" value=25 name="symptoms">High fever</td>
-                <td><input type="checkbox" value=26 name="symptoms">Sunken eyes</td>
-                <td><input type="checkbox" value=27 name="symptoms">Breathlessness</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=28 name="symptoms">Sweating</td>
-                <td><input type="checkbox" value=29 name="symptoms">Dehydration</td>
-                <td><input type="checkbox" value=30 name="symptoms">Indigestion</td>
-                <td><input type="checkbox" value=31 name="symptoms">Headache</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=32 name="symptoms">Yellowish skin</td>
-                <td><input type="checkbox" value=33 name="symptoms">Dark urine</td>
-                <td><input type="checkbox" value=34 name="symptoms">Nausea</td>
-                <td><input type="checkbox" value=35 name="symptoms">Loss of appetite</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=36 name="symptoms">Back pain</td>
-                <td><input type="checkbox" value=37 name="symptoms">Constipation</td>
-                <td><input type="checkbox" value=38 name="symptoms">Abdominal pain</td>
-                <td><input type="checkbox" value=39 name="symptoms">Diarrhoea</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=40 name="symptoms">Yellowing of eyes</td>
-                <td><input type="checkbox" value=41 name="symptoms">Swelling of stomach</td>
-                <td><input type="checkbox" value=42 name="symptoms">Blurred and distorted vision</td>
-                <td><input type="checkbox" value=43 name="symptoms">Chest pain/td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=44 name="symptoms">Weakness in limbs</td>
-                <td><input type="checkbox" value=45 name="symptoms">Pain during bowel movements</td>
-                <td><input type="checkbox" value=46 name="symptoms">Pain in anal region</td>
-                <td><input type="checkbox" value=47 name="symptoms">Bloody stool</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=48 name="symptoms">Irritation in anus</td>
-                <td><input type="checkbox" value=49 name="symptoms">Neck pain</td>
-                <td><input type="checkbox" value=50 name="symptoms">Dizziness</td>
-                <td><input type="checkbox" value=51 name="symptoms">Cramps</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=52 name="symptoms">Bruising</td>
-                <td><input type="checkbox" value=53 name="symptoms">Obesity</td>
-                <td><input type="checkbox" value=54 name="symptoms">Swollen legs</td>
-                <td><input type="checkbox" value=55 name="symptoms">Swollen blood vessels</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=56 name="symptoms">Excessive hunger</td>
-                <td><input type="checkbox" value=57 name="symptoms">Extra marital contacts</td>
-                <td><input type="checkbox" value=58 name="symptoms">Knee pain</td>
-                <td><input type="checkbox" value=59 name="symptoms">Hip joint pain</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=60 name="symptoms">Muscle weakness</td>
-                <td><input type="checkbox" value=61 name="symptoms">Stiff neck</td>
-                <td><input type="checkbox" value=62 name="symptoms">Swelling joints</td>
-                <td><input type="checkbox" value=63 name="symptoms">Movement stiffness</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=64 name="symptoms">Spinning movements</td>
-                <td><input type="checkbox" value=65 name="symptoms">Loss of balance</td>
-                <td><input type="checkbox" value=66 name="symptoms">Unsteadiness</td>
-                <td><input type="checkbox" value=67 name="symptoms">Weakness of one body side</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=68 name="symptoms">Bladder discomfort</td>
-                <td><input type="checkbox" value=69 name="symptoms">Foul smell of urine</td>
-                <td><input type="checkbox" value=70 name="symptoms">Continuous feel of urine</td>
-                <td><input type="checkbox" value=71 name="symptoms">Passage of gases</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=72 name="symptoms">Internal itching</td>
-                <td><input type="checkbox" value=73 name="symptoms">Altered sensorium</td>
-                <td><input type="checkbox" value=74 name="symptoms">Dischromic  patches</td>
-                <td><input type="checkbox" value=75 name="symptoms">Watering from eyes</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=76 name="symptoms">Family history</td>
-                <td><input type="checkbox" value=77 name="symptoms">Mucoid sputum</td>
-                <td><input type="checkbox" value=78 name="symptoms">Lack of concentration</td>
-                <td><input type="checkbox" value=79 name="symptoms">Distention of abdomen</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=80 name="symptoms">Alcohol consumption increased</td>
-                <td><input type="checkbox" value=81 name="symptoms"> Painful walking</td>
-                <td><input type="checkbox" value=82 name="symptoms">Pus filled pimples</td>
-                <td><input type="checkbox" value=83 name="symptoms">Blackheads</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=84 name="symptoms">Scurring</td>
-                <td><input type="checkbox" value=85 name="symptoms">Skin peeling</td>
-                <td><input type="checkbox" value=86 name="symptoms">Silver like dusting</td>
-                <td><input type="checkbox" value=87 name="symptoms">Small dents in nails</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value=88 name="symptoms">Inflammatory nails</td>
-                <td><input type="checkbox" value=89 name="symptoms">Blister</td>
-                <td><input type="checkbox" value=90 name="symptoms">Red sore around nose</td>
-                <td><input type="checkbox" value=91 name="symptoms">Yellow crust ooze</td>
-            </tr>
-        </table>
-    </form>
-    <button class="button" onclick="sub()">PREDICT</button>
-</center>
+        
+        
+        <form>
+            <table>
+                <tr>
+                    <td><input type="checkbox" value=0 name="symptoms">Itching</td>
+                    <td><input type="checkbox" value=1 name="symptoms">Skin rash</td>
+                    <td><input type="checkbox" value=2 name="symptoms">Nodal skin eruptions</td>
+                    <td><input type="checkbox" value=3 name="symptoms">Continuous sneezing</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=4 name="symptoms">Shivering</td>
+                    <td><input type="checkbox" value=5 name="symptoms">Chills</td>
+                    <td><input type="checkbox" value=6 name="symptoms">Joint pain</td>
+                    <td><input type="checkbox" value=7 name="symptoms">Stomach pain</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=8 name="symptoms">Acidity</td>
+                    <td><input type="checkbox" value=9 name="symptoms">Ulcers on tongue</td>
+                    <td><input type="checkbox" value=10 name="symptoms">Muscle wasting</td>
+                    <td><input type="checkbox" value=11 name="symptoms">Vomiting</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=12 name="symptoms">Burning micturition</td>
+                    <td><input type="checkbox" value=13 name="symptoms">Spotting urination</td>
+                    <td><input type="checkbox" value=14 name="symptoms">Fatigue</td>
+                    <td><input type="checkbox" value=15 name="symptoms">Weight gain</td>
+                </tr>
+                <tr>
+
+                    <td><input type="checkbox" value=16 name="symptoms">Anxiety</td>
+                    <td><input type="checkbox" value=17 name="symptoms">Cold hands and feets</td>
+                    <td><input type="checkbox" value=18 name="symptoms">Mood swings</td>
+                    <td><input type="checkbox" value=19 name="symptoms">Weight loss</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=20 name="symptoms">Restlessness</td>
+                    <td><input type="checkbox" value=21 name="symptoms">Lethargy</td>
+                    <td><input type="checkbox" value=22 name="symptoms">Patches in throat</td>
+                    <td><input type="checkbox" value=23 name="symptoms">Irregular sugar level</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=24 name="symptoms">Cough</td>
+                    <td><input type="checkbox" value=25 name="symptoms">High fever</td>
+                    <td><input type="checkbox" value=26 name="symptoms">Sunken eyes</td>
+                    <td><input type="checkbox" value=27 name="symptoms">Breathlessness</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=28 name="symptoms">Sweating</td>
+                    <td><input type="checkbox" value=29 name="symptoms">Dehydration</td>
+                    <td><input type="checkbox" value=30 name="symptoms">Indigestion</td>
+                    <td><input type="checkbox" value=31 name="symptoms">Headache</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=32 name="symptoms">Yellowish skin</td>
+                    <td><input type="checkbox" value=33 name="symptoms">Dark urine</td>
+                    <td><input type="checkbox" value=34 name="symptoms">Nausea</td>
+                    <td><input type="checkbox" value=35 name="symptoms">Loss of appetite</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=36 name="symptoms">Back pain</td>
+                    <td><input type="checkbox" value=37 name="symptoms">Constipation</td>
+                    <td><input type="checkbox" value=38 name="symptoms">Abdominal pain</td>
+                    <td><input type="checkbox" value=39 name="symptoms">Diarrhoea</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=40 name="symptoms">Yellowing of eyes</td>
+                    <td><input type="checkbox" value=41 name="symptoms">Swelling of stomach</td>
+                    <td><input type="checkbox" value=42 name="symptoms">Blurred and distorted vision</td>
+                    <td><input type="checkbox" value=43 name="symptoms">Chest pain/td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=44 name="symptoms">Weakness in limbs</td>
+                    <td><input type="checkbox" value=45 name="symptoms">Pain during bowel movements</td>
+                    <td><input type="checkbox" value=46 name="symptoms">Pain in anal region</td>
+                    <td><input type="checkbox" value=47 name="symptoms">Bloody stool</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=48 name="symptoms">Irritation in anus</td>
+                    <td><input type="checkbox" value=49 name="symptoms">Neck pain</td>
+                    <td><input type="checkbox" value=50 name="symptoms">Dizziness</td>
+                    <td><input type="checkbox" value=51 name="symptoms">Cramps</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=52 name="symptoms">Bruising</td>
+                    <td><input type="checkbox" value=53 name="symptoms">Obesity</td>
+                    <td><input type="checkbox" value=54 name="symptoms">Swollen legs</td>
+                    <td><input type="checkbox" value=55 name="symptoms">Swollen blood vessels</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=56 name="symptoms">Excessive hunger</td>
+                    <td><input type="checkbox" value=57 name="symptoms">Extra marital contacts</td>
+                    <td><input type="checkbox" value=58 name="symptoms">Knee pain</td>
+                    <td><input type="checkbox" value=59 name="symptoms">Hip joint pain</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=60 name="symptoms">Muscle weakness</td>
+                    <td><input type="checkbox" value=61 name="symptoms">Stiff neck</td>
+                    <td><input type="checkbox" value=62 name="symptoms">Swelling joints</td>
+                    <td><input type="checkbox" value=63 name="symptoms">Movement stiffness</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=64 name="symptoms">Spinning movements</td>
+                    <td><input type="checkbox" value=65 name="symptoms">Loss of balance</td>
+                    <td><input type="checkbox" value=66 name="symptoms">Unsteadiness</td>
+                    <td><input type="checkbox" value=67 name="symptoms">Weakness of one body side</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=68 name="symptoms">Bladder discomfort</td>
+                    <td><input type="checkbox" value=69 name="symptoms">Foul smell of urine</td>
+                    <td><input type="checkbox" value=70 name="symptoms">Continuous feel of urine</td>
+                    <td><input type="checkbox" value=71 name="symptoms">Passage of gases</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=72 name="symptoms">Internal itching</td>
+                    <td><input type="checkbox" value=73 name="symptoms">Altered sensorium</td>
+                    <td><input type="checkbox" value=74 name="symptoms">Dischromic patches</td>
+                    <td><input type="checkbox" value=75 name="symptoms">Watering from eyes</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=76 name="symptoms">Family history</td>
+                    <td><input type="checkbox" value=77 name="symptoms">Mucoid sputum</td>
+                    <td><input type="checkbox" value=78 name="symptoms">Lack of concentration</td>
+                    <td><input type="checkbox" value=79 name="symptoms">Distention of abdomen</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=80 name="symptoms">Alcohol consumption increased</td>
+                    <td><input type="checkbox" value=81 name="symptoms"> Painful walking</td>
+                    <td><input type="checkbox" value=82 name="symptoms">Pus filled pimples</td>
+                    <td><input type="checkbox" value=83 name="symptoms">Blackheads</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=84 name="symptoms">Scurring</td>
+                    <td><input type="checkbox" value=85 name="symptoms">Skin peeling</td>
+                    <td><input type="checkbox" value=86 name="symptoms">Silver like dusting</td>
+                    <td><input type="checkbox" value=87 name="symptoms">Small dents in nails</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" value=88 name="symptoms">Inflammatory nails</td>
+                    <td><input type="checkbox" value=89 name="symptoms">Blister</td>
+                    <td><input type="checkbox" value=90 name="symptoms">Red sore around nose</td>
+                    <td><input type="checkbox" value=91 name="symptoms">Yellow crust ooze</td>
+                </tr>
+            </table>
+        </form>
+        <div id="load" class="loader"></div>
+        <button class="button" onclick="sub()">PREDICT</button>
+    </center>
 
 
 
